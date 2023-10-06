@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title%}New Category{% endblock %}
+
+{% block main %}
+    <form action="/new" method="POST">
+        <div class="form-group m-3">
+            <label for="game">Game</label>
+            <input type="text" class="form-control" id="game" name="game">
+        </div>
+        <div class="form-group m-3">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" id="category" name="category">
+        </div>
+        <div class="form-group m-3" id="split_group">
+            <label for="first_item">Splits</label>
+            <input type="text" class="form-control my-1" id="first_item" name="splits[]">
+            <button class="btn btn-primary" id="new_split" type="button">New Split</button>
+        </div>
+        <div class="form-group m-3">
+            <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block script %}
+    document.getElementById("new_split").addEventListener("click", function() {
+        const splitGroup = document.getElementById("split_group");
+        
+        const newSplit = document.createElement("input");
+        newSplit.type = "text";
+        newSplit.className = "form-control my-1";
+        newSplit.name = "splits[]";
+
+        document.getElementById("split_group").insertBefore(newSplit, document.getElementById("new_split"));
+    })
+{% endblock%}
